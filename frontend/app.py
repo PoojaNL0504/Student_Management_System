@@ -24,9 +24,9 @@ section[data-testid="stSidebar"] > div {
 </style>
 """, unsafe_allow_html=True)
 
-# API_URL = "https://studentmanagementsystem-glcptxrwjjppz32kyakmuw.streamlit.app/"
-
-API_URL = "http://127.0.0.1:8000"
+API_URL = "https://studentmanagementsystem-glcptxrwjjppz32kyakmuw.streamlit.app/"
+st.write("API:", API_URL)
+# API_URL = "http://127.0.0.1:8000"
 
 # ---------------- SESSION ----------------
 if "page" not in st.session_state:
