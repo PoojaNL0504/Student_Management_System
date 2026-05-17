@@ -92,11 +92,10 @@ from passlib.context import CryptContext
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(password: str):
-    password = password[:72]   # ✅ truncate
     return pwd_context.hash(password)
 
 def verify_password(plain, hashed):
-    return pwd_context.verify(plain[:72], hashed)
+    return pwd_context.verify(plain, hashed)
 
 def create_user(username: str, password: str):
     db = SessionLocal()
@@ -121,12 +120,16 @@ def create_user(username: str, password: str):
 
     finally:
         db.close()
-        
+
 def authenticate_user(username: str, password: str):
     db = SessionLocal()
     try:
         user = db.query(User).filter(User.username == username).first()
+        
+        print("Username entered:", username)
         print("User from DB:", user)
+        print("Entered password:", password)
+        print("Stored hash:", user.password)
         if not user:
             return None
 
