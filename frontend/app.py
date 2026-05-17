@@ -24,7 +24,7 @@ section[data-testid="stSidebar"] > div {
 </style>
 """, unsafe_allow_html=True)
 
-API_URL = "https://studentmanagementsystem-glcptxrwjjppz32kyakmuw.streamlit.app/"
+API_URL = "https://student-management-system-qxkq.onrender.com/"
 # API_URL = "http://127.0.0.1:8000"
 
 # ---------------- SESSION ----------------
