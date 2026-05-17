@@ -24,7 +24,7 @@ section[data-testid="stSidebar"] > div {
 </style>
 """, unsafe_allow_html=True)
 
-API_URL = "http://127.0.0.1:8000"
+API_URL = ""
 
 # ---------------- SESSION ----------------
 if "page" not in st.session_state:
