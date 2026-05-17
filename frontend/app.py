@@ -62,7 +62,7 @@ if st.session_state.page == "signup":
         else:
             requests.post(
                 f"{API_URL}/signup",
-                params={"username": username, "password": password}
+                json={"username": username, "password": password}
             )
             st.success("Signup successful ✅")
             st.session_state.page = "login"
