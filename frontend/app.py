@@ -24,7 +24,7 @@ section[data-testid="stSidebar"] > div {
 </style>
 """, unsafe_allow_html=True)
 
-API_URL = ""
+API_URL = "https://student-management-system-qxkq.onrender.com/"
 
 # ---------------- SESSION ----------------
 if "page" not in st.session_state:
