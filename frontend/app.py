@@ -24,9 +24,9 @@ section[data-testid="stSidebar"] > div {
 </style>
 """, unsafe_allow_html=True)
 
-API_URL = "https://studentmanagementsystem-glcptxrwjjppz32kyakmuw.streamlit.app/"
+# API_URL = "https://studentmanagementsystem-glcptxrwjjppz32kyakmuw.streamlit.app/"
 
-# API_URL = "http://127.0.0.1:8000"
+API_URL = "http://127.0.0.1:8000"
 
 # ---------------- SESSION ----------------
 if "page" not in st.session_state:
@@ -83,8 +83,10 @@ elif st.session_state.page == "login":
     if st.button("Login 🔑"):
         res = requests.post(
             f"{API_URL}/login",
-            params={"username": username, "password": password}
+            json={"username": username, "password": password}
         )
+        st.write(res.status_code)
+        st.write(res.text)
         try:
             data = res.json()
         except:
