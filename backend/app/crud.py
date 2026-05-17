@@ -121,21 +121,24 @@ def create_user(username: str, password: str):
     finally:
         db.close()
 
+        
 def authenticate_user(username: str, password: str):
     db = SessionLocal()
     try:
         user = db.query(User).filter(User.username == username).first()
-        
+
         print("Username entered:", username)
         print("User from DB:", user)
-        print("Entered password:", password)
-        print("Stored hash:", user.password)
+
         if not user:
-            return None
+            return None   # ✅ STOP here
+
+        print("Stored hash:", user.password)
 
         if not verify_password(password, user.password):
             return None
 
         return user
+
     finally:
         db.close()
