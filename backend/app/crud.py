@@ -111,7 +111,7 @@ def create_user(username: str, password: str):
         db.add(user)        # ✅ add to session
         db.commit()         # ✅ SAVE to DB
         db.refresh(user)    # ✅ optional
-
+        print("Created user:", user.username)
         return user
 
     except Exception as e:
@@ -121,6 +121,7 @@ def create_user(username: str, password: str):
 
     finally:
         db.close()
+        
 def authenticate_user(username: str, password: str):
     db = SessionLocal()
     try:

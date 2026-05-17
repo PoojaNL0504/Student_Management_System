@@ -16,9 +16,15 @@ def signup(username: str, password: str):
 
 
 
+from pydantic import BaseModel
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
 @router.post("/login")
-def login(username: str, password: str):
-    user = authenticate_user(username, password)
+def login(data: LoginRequest):
+    user = authenticate_user(data.username, data.password)
     print("LOGIN USER:", user)
     if not user:
         return {"message": "Invalid credentials"}
