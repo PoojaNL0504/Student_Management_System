@@ -62,7 +62,7 @@ if st.session_state.page == "signup":
         else:
             requests.post(
                 f"{API_URL}/signup",
-                json={"username": username, "password": password}
+                params={"username": username, "password": password}
             )
             st.success("Signup successful ✅")
             st.session_state.page = "login"
@@ -83,7 +83,7 @@ elif st.session_state.page == "login":
     if st.button("Login 🔑"):
         res = requests.post(
             f"{API_URL}/login",
-            json={"username": username, "password": password}
+            params={"username": username, "password": password}
         )
         
         st.write(res.status_code)
@@ -152,7 +152,7 @@ elif st.session_state.page == "app":
         if st.button("Create 🚀"):
             requests.post(
                 f"{API_URL}/students",
-                json={"name": name, "age": age},
+                params={"name": name, "age": age},
                 headers=headers
             )
             st.success("Created ✅")
@@ -174,7 +174,7 @@ elif st.session_state.page == "app":
             if st.button("Update"):
                 requests.put(
                     f"{API_URL}/students/{student_id}",
-                    json={"name": new_name, "age": new_age},
+                    params={"name": new_name, "age": new_age},
                     headers=headers
                 )
                 st.success("Updated ✅")
