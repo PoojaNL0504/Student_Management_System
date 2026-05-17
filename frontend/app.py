@@ -24,7 +24,9 @@ section[data-testid="stSidebar"] > div {
 </style>
 """, unsafe_allow_html=True)
 
-API_URL = "https://studentmanagementsystem-glcptxrwjjppz32kyakmuw.streamlit.app/"
+# API_URL = "https://studentmanagementsystem-glcptxrwjjppz32kyakmuw.streamlit.app/"
+
+API_URL = "http://127.0.0.1:8000"
 
 # ---------------- SESSION ----------------
 if "page" not in st.session_state:
@@ -83,11 +85,12 @@ elif st.session_state.page == "login":
             f"{API_URL}/login",
             params={"username": username, "password": password}
         )
-        if res.status_code == 200:
+        try:
             data = res.json()
-        else:
-            st.error(f"API Error: {res.status_code}")
-            st.write(res.text)
+        except:
+                st.error("Backend not responding properly")
+                st.write(res.text)  # 🔥 shows real error
+                st.stop()
 
         if "access_token" in data:
             st.session_state.token = data["access_token"]
@@ -103,7 +106,12 @@ elif st.session_state.page == "app":
 
     # 🔥 FETCH DATA
     res = requests.get(f"{API_URL}/students", headers=headers)
-    data = res.json() if res.status_code == 200 else []
+    try:
+        data = res.json()
+    except:
+                st.error("Backend not responding properly")
+                st.write(res.text)  # 🔥 shows real error
+                st.stop()
 
     # ---------------- DASHBOARD ----------------
     if menu == "Dashboard":
