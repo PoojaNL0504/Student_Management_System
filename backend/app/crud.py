@@ -123,12 +123,15 @@ def create_user(username: str, password: str):
         db.close()
 def authenticate_user(username: str, password: str):
     db = SessionLocal()
-    user = db.query(User).filter(User.username == username).first()
+    try:
+        user = db.query(User).filter(User.username == username).first()
+        print("User from DB:", user)
+        if not user:
+            return None
 
-    if not user:
-        return None
+        if not verify_password(password, user.password):
+            return None
 
-    if not verify_password(password, user.password):  # ✅ important
-        return None
-
-    return user
+        return user
+    finally:
+        db.close()
