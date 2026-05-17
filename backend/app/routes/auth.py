@@ -19,7 +19,7 @@ def signup(username: str, password: str):
 @router.post("/login")
 def login(username: str, password: str):
     user = authenticate_user(username, password)
-
+    print("LOGIN USER:", user)
     if not user:
         return {"message": "Invalid credentials"}
 

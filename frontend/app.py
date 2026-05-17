@@ -24,7 +24,7 @@ section[data-testid="stSidebar"] > div {
 </style>
 """, unsafe_allow_html=True)
 
-API_URL = "https://student-management-system-qxkq.onrender.com/"
+API_URL = "https://studentmanagementsystem-glcptxrwjjppz32kyakmuw.streamlit.app/"
 
 # ---------------- SESSION ----------------
 if "page" not in st.session_state:
@@ -83,7 +83,11 @@ elif st.session_state.page == "login":
             f"{API_URL}/login",
             params={"username": username, "password": password}
         )
-        data = res.json()
+        if res.status_code == 200:
+            data = res.json()
+        else:
+            st.error(f"API Error: {res.status_code}")
+            st.write(res.text)
 
         if "access_token" in data:
             st.session_state.token = data["access_token"]
@@ -97,7 +101,7 @@ elif st.session_state.page == "app":
 
     headers = {"Authorization": f"Bearer {st.session_state.token}"}
 
-    #  FETCH DATA
+    # 🔥 FETCH DATA
     res = requests.get(f"{API_URL}/students", headers=headers)
     data = res.json() if res.status_code == 200 else []
 
