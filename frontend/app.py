@@ -26,6 +26,7 @@ section[data-testid="stSidebar"] > div {
 
 API_URL = "https://student-management-system-qxkq.onrender.com/"
 # API_URL = "http://127.0.0.1:8000"
+st.write(f"{API_URL}/login")
 
 # ---------------- SESSION ----------------
 if "page" not in st.session_state:
@@ -84,6 +85,7 @@ elif st.session_state.page == "login":
             f"{API_URL}/login",
             json={"username": username, "password": password}
         )
+        
         st.write(res.status_code)
         st.write(res.text)
         try:
